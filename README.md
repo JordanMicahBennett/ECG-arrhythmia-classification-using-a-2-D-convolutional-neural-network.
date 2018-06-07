@@ -1,2 +1,2 @@
-# Arythmia-prediction-using-ECG
-Arythmia prediction using MITDB dataset
+# Arrythmia-prediction-using-ECG
+Arrythmia prediction using MITDB dataset
