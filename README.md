@@ -15,3 +15,6 @@ The model can detect arrythmias of 6 types namely:
 5. Right bundle branch block beat (RBB)
 6. Ventricular escape beat (VEB)
 
+# Using the model
+You can download the model from the link mentioned above. Run main.py and provide the required directories. You can give a csv ecg file or images of segmented ecg beats as your input. Mostly you will have a csv file of an ecg signal. 
+
