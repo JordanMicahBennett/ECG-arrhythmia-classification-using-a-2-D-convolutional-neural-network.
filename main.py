@@ -9,7 +9,8 @@ from keras.models import load_model
 import numpy as np
 from collections import Counter
 
-model = load_model('/home/ankur/Downloads/ecg_model_own.hdf5')
+model_path = input("Enter the path to your model: ")
+model = load_model(model_path)
 
 images = glob(directory + '/*.png')
 
