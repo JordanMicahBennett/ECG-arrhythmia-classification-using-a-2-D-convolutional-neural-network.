@@ -1,4 +1,5 @@
-# Arrythmia-prediction-using-ECG
+# ECG arrhythmia classification using a 2-D convolutional neural network.
+
 ECG arrhythmia classification using a 2-D convolutional neural network.
 
 This is an implementation of this paper: https://arxiv.org/pdf/1804.06812.pdf
