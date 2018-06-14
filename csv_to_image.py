@@ -1,5 +1,5 @@
-path = input("Enter the path of the csv file")
-directory = input("Enter the directory where you want to save the images")
+path = input("Enter the path of the csv file: ")
+directory = input("Enter the directory where you want to save the images: ")
 
 
 
@@ -15,11 +15,13 @@ def main(path, directory):
         count = 1
         peaks =  biosppy.signals.ecg.christov_segmenter(signal=data, sampling_rate = 200)[0]
         for i in (peaks[1:-1]):
-            x = peaks[count - 1] + 50
-            y = peaks[count + 1] - 50
-            signal = data[x:y]
-            signals.append(signal)
-            count += 1
+        	diff1 = abs(peaks[count - 1] - i)
+        	diff2 = abs(peaks[count + 1]- i)
+        	x = peaks[count - 1] + diff1//2
+        	y = peaks[count + 1] - diff2//2
+        	signal = data[x:y]
+        	signals.append(signal)
+        	count += 1
         return signals
     
     def signal_to_img(array, directory):  
@@ -27,12 +29,16 @@ def main(path, directory):
         import cv2
         import matplotlib.pyplot as plt
 
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        else:
-            print('This directory is already in use.')
-            directory = input("Enter the directory where you want to save the images")
-            os.makedirs(directory)
+        while(1):
+            if os.path.exists(directory):
+                print('This directory is already in use.')
+                
+            
+
+            else:
+                os.makedirs(directory)
+                break
+            directory = input("Enter the directory where you want to save the images: ")
 
         for count, i in enumerate(array):
             fig = plt.figure(frameon=False)
@@ -46,8 +52,10 @@ def main(path, directory):
             im_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
             im_gray = cv2.resize(im_gray, (128, 128), interpolation = cv2.INTER_LANCZOS4)
             cv2.imwrite(filename, im_gray)
+        return directory
     array = segmentation(path)
-    signal_to_img(array, directory)
+    directory = signal_to_img(array, directory)
+    return directory
 
-main(path, directory)
+directory = main(path, directory)
     
