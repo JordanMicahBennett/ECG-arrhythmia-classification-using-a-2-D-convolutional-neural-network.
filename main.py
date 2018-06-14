@@ -9,8 +9,7 @@ from keras.models import load_model
 import numpy as np
 from collections import Counter
 
-model_path = input("Enter the path to your model: ")
-model = load_model(model_path)
+model = load_model('/home/ankur/Downloads/ecg_model_own.hdf5')
 
 images = glob(directory + '/*.png')
 
@@ -25,31 +24,65 @@ for i in images:
 
 most_common,num_most_common = Counter(pred_li).most_common(1)[0]
 
-
+print("MOST COMMON")
 if(most_common == 0):
 	print('The patient may have atrial premature contraction beat (APC).')
-	print('Number of beats of APC tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of APC tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 1):
 	print('The patient may be healthy.')
-	print('Number of beats of healthy tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of healthy tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 2):
 	print('The patient may have left bundle branch block beat (LBB).')
-	print('Number of beats of LBB tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of LBB tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 3):
 	print('The patient may have paced beat (PAB).')
-	print('Number of beats of PAB tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of PAB tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 4):
 	print('The patient may have premature ventricular contraction beat (PVC).')
-	print('Number of beats of PVC tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of PVC tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 5):
 	print('The patient may have right bundle branch block beat (RBB).')
-	print('Number of beats of RBB tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of RBB tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
 
 elif(most_common == 6):
 	print('The patient may have ventricular escape beat (VEB).')
-	print('Number of beats of VEB tpye are ' + str(most_common) + ' out of ' + str(len(images)))
+	print('Number of beats of VEB tpye are ' + str(num_most_common) + ' out of ' + str(len(images)))
+
+try:
+	second_most_common,num_second_most_common = Counter(pred_li).most_common(2)[1]
+	print("\n\nSECOND MOST COMMON")
+	if(second_most_common == 0):
+		print('The patient may have atrial premature contraction beat (APC).')
+		print('Number of beats of APC tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 1):
+		print('The patient may be healthy.')
+		print('Number of beats of healthy tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 2):
+		print('The patient may have left bundle branch block beat (LBB).')
+		print('Number of beats of LBB tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 3):
+		print('The patient may have paced beat (PAB).')
+		print('Number of beats of PAB tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 4):
+		print('The patient may have premature ventricular contraction beat (PVC).')
+		print('Number of beats of PVC tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 5):
+		print('The patient may have right bundle branch block beat (RBB).')
+		print('Number of beats of RBB tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+
+	elif(second_most_common == 6):
+		print('The patient may have ventricular escape beat (VEB).')
+		print('Number of beats of VEB tpye are ' + str(num_second_most_common) + ' out of ' + str(len(images)))
+except IndexError:
+	pass
+
